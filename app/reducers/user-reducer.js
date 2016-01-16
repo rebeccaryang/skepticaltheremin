@@ -29,8 +29,12 @@ function userReducer (state, action) {
         activeRace: action.payload
       });
     case LOCATION_CHANGE:
+    console.log('inLocation change', state);
       return _.extend({}, state, {
-        currentLocation: action.payload
+        currentLocation: {
+          lat: action.payload.coords.latitude,
+          lng: action.payload.coords.longitude
+        }
       });
     case LOGIN:
       return _.extend({}, state, {

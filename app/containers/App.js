@@ -27,22 +27,20 @@ var contextType = {
 
 var App = React.createClass({
 
-  // doubl-check later
-  // propTypes: {
-  //   user: PropTypes.object.isRequired,
-  //   view: PropTypes.string.isRequired,
-  //   activeRace: PropTypes.object,
-  //   newRace: PropTypes.object
-  // },
-  // willRecieveProps(){
-  //   this.setState();
-  // }
+  componentDidMount(){
+    const { locationChange } = this.props.locationChangeAction;
+    if (window.navigator && window.navigator.geolocation){
+      window.navigator.geolocation
+        .getCurrentPosition((pos) => {
+          locationChange(pos);
+        });
+    } else {
+      // send action with error
+      console.log('No location available');
+    }
+  },
 
   render: function() {
-    console.log('APP ID',this.props.user._id)
-    // {currentView}
-    // if(this.props.view === 'Create'){
-    //
     var currentView = null;
 
     switch(this.props.view){
