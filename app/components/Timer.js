@@ -2,19 +2,16 @@ var React = require('react');
 
 
 var Timer = React.createClass({
-	componentDidMount(){
+	componentDidMount: function(){
 		//get the time of the selected race?
 	},
 
-	componentDidUpdate(){
+	componentDidUpdate: function(){
 		//get time of selected race
 		//COUNT DOWN BEESH
 		//setInterval?
 	},
-	render(){
-		return () {
-			
-		}
+	render: function(){
 	}
 });
 
