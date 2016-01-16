@@ -1,13 +1,19 @@
 var React = require('react');
 var NavBar = require('./NavBar');
 var RacerList = require('./RacerList');
+var Map = require('./Map');
+var Timer = require('./Timer');
+
 var http = require('rest');
 var mime = require('rest/interceptor/mime');
 http = http.wrap(mime);
 
+var ADD_AVAILABLE_RACES = require('../constants.js').action.ADD_AVAILABLE_RACES;
+
 
 
 var Race = React.createClass({
+	//gets current location, queries the db for nearby races starting soon and changes the state
 	componentDidMount: function () {
 		var that = this;
 		navigator.geolocation.getCurrentPosition(function(location){
@@ -25,22 +31,24 @@ var Race = React.createClass({
 
 			http(options)
 				.then(function(results){
+					console.log(that.props);
 					var availableRaces = results.entity;
-					console.log('props',that.props);
-					//dispatch(setAvailableRaces(result))
-				})
+					that.props.raceAction.addAvailableRaces(availableRaces); //race action that maps to user-reducer
+				});
 		});
-
-
-		//from within the map component, dispatch action on click?
-
 	},
 
+	//need to add timer here
+	//need to map buttons onClick to actions
 
 	render: function(){
 		return (
 			<div className="race-view">
 				<h1>Race</h1>
+				<Map {...this.props} />
+				<Timer {...this.props} />
+				<button className="checkin-race">Check In</button>
+				<button className="cancel-race">Cancel</button>
 				<h3>Results: {this.props.activeRace.name}</h3>
 				<RacerList racers={this.props.activeRace.racers} />
 			</div>
@@ -48,6 +56,10 @@ var Race = React.createClass({
 	}
 
 });
+
+
+//--------------------HELPER FUNCTIONS------------------------------
+
 
 function getCurrentDateTimeInString () {
 	var current = new Date();
