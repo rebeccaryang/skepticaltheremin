@@ -68,10 +68,16 @@ router.route('/users/:user_id/races')
 
   //create new race  
   .post(function (req, res) {
+    var waymarks = req.body.waymarks.map(function(waymark){
+      waymark[0] = parseFloat(waymark[0]);
+      waymark[1] = parseFloat(waymark[1]);
+      return waymark;
+    });
+
     var newRace = {
       creator: req.params.user_id,
-      waymarks: req.body.waymarks,
-      start_location: {coordinates: req.body.waymarks[0]},
+      waymarks: waymarks,
+      start_location: {coordinates: waymarks[0]},
       racers: [], //users participating in race
       results: [], // result of race
       date: req.body.date,
@@ -84,7 +90,7 @@ router.route('/users/:user_id/races')
     //when you create the race, the user needs all of the user's races
     raceController.addOne(newRace, function(err, createdRace){
       if (err) {
-        return res.json({err: err});
+        return res.json(404, {err: err});
       }
       res.json(createdRace);
     })

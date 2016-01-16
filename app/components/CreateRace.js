@@ -91,7 +91,10 @@ var CreateRace = React.createClass({
 
   searchForAddress(address, cb, recenter){
     var self = this;
+    var addressArr = address.split(" ");
+    this.props.publishAction.addWayPoint([addressArr[1], addressArr[0]])
     console.log("search called", address);
+
 
     // We will use GMaps' geocode functionality,
     // which is built on top of the Google Maps API
@@ -145,7 +148,7 @@ var CreateRace = React.createClass({
         <h1 onMouseOver={this.handleHeaderClick} className="col-xs-12 col-md-6 col-md-offset-3">Create a Race</h1>
         <Search onSearch={this.searchForAddress} />
 
-        <CreateRaceForm />
+        <CreateRaceForm {...this.props}/>
 
         <Map lat={this.state.mapCoordinates.lat}
           lng={this.state.mapCoordinates.lng}

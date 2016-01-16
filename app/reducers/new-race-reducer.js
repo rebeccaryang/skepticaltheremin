@@ -26,9 +26,7 @@ function raceReducer(state, action){
       });
     case ADD_WAYPOINT:
       return _.extend({}, state, {
-        newRace:{
-          waymarks: state.waymarks.concat([action.payload.waymark])
-        }
+          waymarks: state.waymarks.concat([action.payload])
       });
     case PUBLISH_RACE://click the submit button
       return _.extend({}, initial);

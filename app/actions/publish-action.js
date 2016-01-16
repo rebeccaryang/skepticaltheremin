@@ -20,6 +20,7 @@ function centerMap(payload){
 };
 
 function addWayPoint(payload){
+  console.log('waypoint added', payload)
    return {
     type: ADD_WAYPOINT,
     payload: payload
@@ -33,28 +34,43 @@ function clearForm(){
 }
 
 // TODO LATER
-function publishRace(payload){
+function publishRace(payload, id){
   // make ajax call to server with Post
   //
-  var id = store.getState().user.id;
-  var options = {
-      method: 'POST',
-      uri: '/users/' + id + '/races',
-      body: payload,
-      json: true // Automatically stringifies the body to JSON
-  };
+  // console.log(payload);
+  // var id = store.getState().user.id;
+  // var options = {
+  //     method: 'POST',
+  //     uri: '/users/' + id + '/races',
+  //     body: payload,
+  //     json: true // Automatically stringifies the body to JSON
+  // };
 
 
-  http(options)
-      .then(function (parsedBody) {
-          dispatch(clearForm());
-      })
-      .catch(function (err) {
-          // POST failed...
-      });
-  // then,
-    // on success, extend current state
-    // on error, leave current state
+  // http(options)
+  //     .then(function (parsedBody) {
+  //         dispatch(clearForm());
+  //     })
+  //     .catch(function (err) {
+  //         // POST failed...
+  //     });
+  // // then,
+  //   // on success, extend current state
+  //   // on error, leave current state
+  id = '5699c9aa9bfa34981928027a';
+   $.ajax({
+      url: '/api/users/' + id + '/races',
+      type: 'POST',
+      data: JSON.stringify(payload),
+      contentType: 'application/json',
+      success: function (data) {
+        console.log('sucess!', data)
+
+      },
+      error: function (data) {
+        console.log('failed', data);
+      }
+    });
 }
 
 module.exports = {
