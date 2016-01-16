@@ -3,13 +3,12 @@ var React = require('react');
 
 var Timer = React.createClass({
 	componentDidMount: function(){
-		//get the time of the selected race?
+		//do nothing?
 	},
 
 	componentDidUpdate: function(){
-		//get time of selected race
-		//COUNT DOWN BEESH
-		//setInterval?
+		var currentTime = new Date();
+		console.log('datetime timer',currentTime);
 	},
 	render: function(){
 	}
