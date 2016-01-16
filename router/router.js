@@ -99,6 +99,8 @@ router.route('/users/:user_id/races')
     if(req.query.lat) {
       dbQueryParams.lat = req.query.lat;
       dbQueryParams.lng = req.query.lng;
+      
+
       dbQueryParams.proximity = req.query.proximity;
       dbQueryParams.date = req.query.date;
       dbQueryParams.time = req.query.time;

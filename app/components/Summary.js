@@ -25,6 +25,7 @@ var Summary = React.createClass({
         <RacerList racers={results} />
       </div>
 		);
+
 	}
 });
 

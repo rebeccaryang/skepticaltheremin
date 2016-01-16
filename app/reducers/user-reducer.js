@@ -8,6 +8,7 @@ var ACTION_TYPE = require('../constants').action.ACTION_TYPE;
 var CREATED_RACES_SUCCESS = require('../constants').action.CREATED_RACES_SUCCESS;
 var SELECT_RACE = require('../constants').action.SELECT_RACE;
 var LOCATION_CHANGE = require('../constants').action.LOCATION_CHANGE;
+var ADD_AVAILABLE_RACES = require('../constants.js').action.ADD_AVAILABLE_RACES;
 
 var initial = {
     _id: null,
@@ -24,10 +25,6 @@ function userReducer (state, action) {
       return _.extend({}, state, {
         createdRaces: action.payload
       });
-    case SELECT_RACE:
-      return _.extend({}, state, {
-        activeRace: action.payload
-      });
     case LOCATION_CHANGE:
     console.log('inLocation change', state);
       return _.extend({}, state, {
@@ -43,6 +40,10 @@ function userReducer (state, action) {
     case LOGOUT:
       return _.extend({}, state, {
         isLoggedIn: false
+      });
+    case ADD_AVAILABLE_RACES:
+      return _.extend({}, state, {
+        availableRaces: action.payload
       });
     default:
       return state;
