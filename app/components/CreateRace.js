@@ -139,7 +139,6 @@ var CreateRace = React.createClass({
 
   render(){
 
-    console.log(this.props);
     return (
 
       <div>

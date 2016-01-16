@@ -9,6 +9,7 @@ var RaceListItem = require('./RaceListItem');
 var RaceList = React.createClass({
   render: function(){
     const { createdRaces } = this.props.user;
+    const { navSummary } = this.props.navigateToAction;
 
     const races = map([{},{},{},{}], function(race, index){
       var newprops = extend({}, race, {
@@ -25,6 +26,7 @@ var RaceList = React.createClass({
 
     return (
       <div className="race-view">
+        <button onClick={navSummary}>Go to Summary</button>
         <h1>Current Races</h1>
         <ul className="created-races__list">
           {races}
