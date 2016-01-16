@@ -41,7 +41,8 @@ exports.find = function(searchParams, callback) {
 			callback(null, usersRaces);
 		})
 	} else {
-		var coords = [parseInt(searchParams.lat), parseInt(searchParams.lng)];
+
+		var coords = [parseFloat(searchParams.lng),parseFloat(searchParams.lat)];
 		var maxDistance = parseInt(searchParams.proximity)*1000;
 		var date = searchParams.date; //string
 		var time = searchParams.time; //string
